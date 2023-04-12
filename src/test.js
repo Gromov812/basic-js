@@ -59,36 +59,34 @@ Object.setPrototypeOf(deeperFakeDate, Object.getPrototypeOf(new Date()));
 //   }
   
 // console.log(getSeason(deeperFakeDate));
-
-let chainMaker = {
-
+const chainMaker = {
     chain: [],
+  
+    getLength() {
+      return this.chain.length;
+    },
+    addLink(n) {
+        n = `${n}`
+      this.chain = [...this.chain, n];
+      return this;
+    },
+    removeLink(n) {
+      if (n-1 < 0 || n-1 > this.chain.length-1 || isNaN(n)) return "You can\'t remove incorrect link!"
+      this.chain.splice(n-1,1);
+      return this;
+    },
+    reverseChain() {
+      this.chain.reverse();
+      return this;
+    },
+    finishChain() {
+      this.chain = this.chain.map(el => `( ${el} )`).join('~~');
+      return this.chain;
+    }
+  };
 
-    addLink (n)  {
-       this.chain = [...this.chain, n];
-       return this;
-    },
-    getLength () {
-        return this.chain.length;
-    },
-    removeLink (n)  {
-        this.chain.splice(n-1,1);
-        return this;
-    },
-    reverseChain ()  {
-        this.chain.reverse();
-        return this;
-    },
-    finishChain  ()  {
-        // this.chain.map(el => `( ${el} )`).join('~~');
-        this.chain = this.chain.map(el => `( ${el} )`).join('~~');
-        return this.chain;
-       
-    },
-}
 
-
-console.log(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').finishChain());
+console.log(chainMaker.addLink(1).addLink(2).addLink(3).removeLink(3));
 
 
 
