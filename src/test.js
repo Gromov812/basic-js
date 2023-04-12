@@ -60,36 +60,35 @@ Object.setPrototypeOf(deeperFakeDate, Object.getPrototypeOf(new Date()));
   
 // console.log(getSeason(deeperFakeDate));
 
-function transform(arr) {
-    if (!(arr instanceof Array)) return '\'arr\' parameter must be an instance of the Array!';
-    let res = [...arr];
-  
-    arr.forEach((el,i,arr) => {
-      switch (el) {
-        case '--discard-next':
-            res[i] = '';
-            res[i+1] = '';
-          break;
-        case '--discard-prev':
-            res[i] = '';
-            res[i-1] = '';
-          break;
-        case '--double-next':
-          res[i] = res[i+1];
-          break;
-        case '--double-prev':
-          res[i] = res[i-1];
-        break;
-      }
-    })
-    return res.filter(el => el != '');
-  }
+let chainMaker = {
 
-transform(3)
-transform(3.312312)
-transform(false)
-transform(null)
-transform(undefined)
-transform({ 'foo': 'bar' })
+    chain: [],
 
-console.log(transform([1, 2, 3, '--discard-next', 1337, '--discard-prev', 4, 5]));
+    addLink (n)  {
+       this.chain = [...this.chain, n];
+       return this;
+    },
+    getLength () {
+        return this.chain.length;
+    },
+    removeLink (n)  {
+        this.chain.splice(n-1,1);
+        return this;
+    },
+    reverseChain ()  {
+        this.chain.reverse();
+        return this;
+    },
+    finishChain  ()  {
+        // this.chain.map(el => `( ${el} )`).join('~~');
+        this.chain = this.chain.map(el => `( ${el} )`).join('~~');
+        return this.chain;
+       
+    },
+}
+
+
+console.log(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').finishChain());
+
+
+
