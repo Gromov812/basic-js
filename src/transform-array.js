@@ -14,7 +14,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
  function transform(arr) {
-  if (!(arr instanceof Array)) return '\'arr\' parameter must be an instance of the Array!';
+  if (!(arr instanceof Array)) throw new Error ('\'arr\' parameter must be an instance of the Array!');
   let res = [...arr];
 
   arr.forEach((el,i,arr) => {
@@ -24,14 +24,16 @@ const { NotImplementedError } = require('../extensions/index.js');
           res[i+1] = '';
         break;
       case '--discard-prev':
-          res[i] = '';
-          res[i-1] = '';
+         res[i] = '';
+         if (i-1 >= 0) res[i-1] = '';
         break;
       case '--double-next':
-        res[i] = res[i+1];
+        if (i+1 <= arr.length-1) res[i] = res[i+1];
+        else res[i] = '';
         break;
       case '--double-prev':
-        res[i] = res[i-1];
+        if (i-1 >=0) res[i] = res[i-1];
+        else res[i] = '';
       break;
     }
   })

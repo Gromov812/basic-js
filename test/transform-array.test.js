@@ -65,7 +65,7 @@ describe('Transform array', () => {
 
         it.optional('advanced sequence interactions work well', () => {
             const cases = {
-                doubleDiscarded: {
+                doubleDiscarded: {  
                     input: [1, 2, 3, '--discard-next', 1337, '--double-prev', 4, 5],
                     output: [1, 2, 3, 4, 5]
                 },
