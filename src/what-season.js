@@ -14,7 +14,6 @@ const { NotImplementedError } = require('../extensions/index.js');
  function getSeason(d) {
   if (arguments.length == 0)  return 'Unable to determine the time of year!';
   if (d instanceof Date == false) throw new Error("Invalid date!");
-  
   try {
       d.toLocaleString()
   }
