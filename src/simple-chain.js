@@ -18,8 +18,13 @@ const { NotImplementedError } = require('../extensions/index.js');
   },
   removeLink(n) {
 
-    if (n-1 < 0 || n-1 > this.chain.length-1 || isNaN(n)) throw new Error (`You can't remove incorrect link!`);
-    this.chain.splice(n-1,1);
+    if (n < 1 || n > this.chain.length || !Number.isInteger(n) ) {
+           
+      this.chain = [];
+      throw new Error ('You can\'t remove incorrect link!');
+        } 
+        
+        this.chain.splice(n-1,1);
 
     return this;
   },
