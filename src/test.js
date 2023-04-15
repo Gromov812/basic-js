@@ -59,41 +59,53 @@ Object.setPrototypeOf(deeperFakeDate, Object.getPrototypeOf(new Date()));
 //   }
   
 // console.log(getSeason(deeperFakeDate));
-const chainMaker = {
-    chain: [],
-  
-    getLength() {
-      return this.chain.length;
-    },
-    addLink(n) {
-        if (arguments.length == 0) n = ' ';
-        n = `${n}`
-      this.chain = [...this.chain, n];
-      return this;
-    },
-    removeLink(n) {
-        if (n < 1 || n > this.chain.length || !Number.isInteger(n) ) {
-            
-            this.chain = [];
-            throw new Error ('You can\'t remove incorrect link!');
-            
-        }
-        this.chain.splice(n-1,1);
-      return this;
-    },
-    reverseChain() {
-      this.chain = this.chain.reverse();
-      return this;
-    },
-    finishChain() {
-      let res = this.chain.map(el => `( ${el} )`).join('~~');
-      this.chain = [];
-      return res;
+
+class DepthCalculator {
+
+    constructor() {
+        this.total = 1;
+        this.counter = 1;
     }
-  };
+    
+    calculateDepth (arr) {
+       
+        arr.forEach(el => {
+            if (Array.isArray(el)) checkArray.call(this,arr)
+        })
+        
+        
+        function checkArray (elem) {
+           
+    
+            elem.forEach(el => {
+                
+                if (Array.isArray(el)) {
+                    this.counter += 1;
+                    checkArray.call(this,el)
+                }
+    
+                
+            });
+    
+            this.total = this.total < this.counter ? this.counter : this.total;
+            this.counter = 0;
+    
+        }
+    
+        let res = this.total +1;
+        this.total = 0;
+        this.counter = 0;
+
+    return res;
+    }
+}
+
+let d = new DepthCalculator();
+
+    console.log(d.calculateDepth([1, 2, 3, 4, 5, [1]]));
 
 
-console.log(chainMaker.addLink(1).addLink(2).addLink(3).removeLink(4));
+
 
 
 

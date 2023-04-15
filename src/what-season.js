@@ -12,18 +12,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
  function getSeason(d) {
-  if (arguments.length == 0)  return 'Unable to determine the time of year!';
+  if (d == null)  return 'Unable to determine the time of year!';
   if (d instanceof Date == false) throw new Error("Invalid date!");
+
   try {
       d.toLocaleString()
   }
   catch(e) {
-     if (e) throw new Error("Invalid date!");
+     if (e) throw new Error('Invalid date!');
   }
 
-  if (!(d instanceof Date) && isNaN(d.getMonth)) throw new Error('Invalid date!');
-      d = new Date(d);
-  d = d.getUTCMonth()+1
+  d = d.getMonth()+1;
   
 
     let res;
