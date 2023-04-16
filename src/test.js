@@ -34,7 +34,7 @@ Object.setPrototypeOf(deeperFakeDate, Object.getPrototypeOf(new Date()));
 // function getSeason(d) {
 //     if (arguments.length == 0)  return 'Unable to determine the time of year!';
 //     if (d instanceof Date == false) return "Invalid date!";
-    
+
 //     try {
 //         d.toLocaleString()
 //     }
@@ -46,66 +46,112 @@ Object.setPrototypeOf(deeperFakeDate, Object.getPrototypeOf(new Date()));
 //         d = new Date(d);
 //     d = d.getUTCMonth()+1
 //       if (!d) return "Invalid date!";
-  
+
 //       let res;
-      
+
 //       if (d >= 1 & d <=2) res = 'winter';
 //       if (d >=12) res = 'winter';
 //       if (d >= 3 & d <=5) res = 'spring';
 //       if (d >= 6 & d <=8) res = 'summer';
 //       if (d >= 9 & d <=11) res = 'autumn';
-          
+
 //       return res;
 //   }
-  
+
 // console.log(getSeason(deeperFakeDate));
 
-class DepthCalculator {
+// class DepthCalculator {
 
-    constructor() {
-        this.total = 1;
-        this.counter = 1;
+//     constructor() {
+//         this.total = 1;
+//         this.counter = 1;
+//     }
+
+//     calculateDepth (arr) {
+
+//         arr.forEach(el => {
+//             if (Array.isArray(el)) checkArray.call(this,arr)
+//         })
+
+
+//         function checkArray (elem) {
+
+
+//             elem.forEach(el => {
+
+//                 if (Array.isArray(el)) {
+//                     this.counter += 1;
+//                     checkArray.call(this,el)
+//                 }
+
+
+//             });
+
+//             this.total = this.total < this.counter ? this.counter : this.total;
+//             this.counter = 0;
+
+//         }
+
+//         let res = this.total +1;
+//         this.total = 0;
+//         this.counter = 0;
+
+//     return res;
+//     }
+// }
+
+// let d = new DepthCalculator();
+
+//     console.log(d.calculateDepth([1, 2, 3, 4, 5, [1]]));
+
+
+
+
+
+
+// try {
+//     // Выполняете тут код, если он выдаст ошибку, то выполнятся будет код в catch
+//     date.toLocalString(); // если код выдаст ошибку, то прокидывайте её в catch блоке 
+// }
+// catch(e) {
+//     // 
+//     if (e) throw new Error('Invalide date!') // Если в (e) у нас есть ошибка, то выполнится throw new Error
+// }
+
+
+
+
+
+function getSumOfDigits(n) {
+
+   n = n.toString();
+   let res = 0;
+
+   reducer(n);
+   
+    function reducer (num) {
+ res = 0;
+        num = num.toString();
+        console.log(`reducer`, num);
+
+        for ( let i = 0; i < n.length; i++ ) {
+
+            res += +num[i]
+        
+           }
+
     }
-    
-    calculateDepth (arr) {
-       
-        arr.forEach(el => {
-            if (Array.isArray(el)) checkArray.call(this,arr)
-        })
-        
-        
-        function checkArray (elem) {
-           
-    
-            elem.forEach(el => {
-                
-                if (Array.isArray(el)) {
-                    this.counter += 1;
-                    checkArray.call(this,el)
-                }
-    
-                
-            });
-    
-            this.total = this.total < this.counter ? this.counter : this.total;
-            this.counter = 0;
-    
-        }
-    
-        let res = this.total +1;
-        this.total = 0;
-        this.counter = 0;
 
+   if (res.toString().length > 1) {
+    reducer(res)
+   }
     return res;
-    }
+
+
 }
 
-let d = new DepthCalculator();
-
-    console.log(d.calculateDepth([1, 2, 3, 4, 5, [1]]));
 
 
-
-
+console.log(getSumOfDigits(35));
 
 
