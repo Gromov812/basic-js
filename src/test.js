@@ -122,36 +122,48 @@ Object.setPrototypeOf(deeperFakeDate, Object.getPrototypeOf(new Date()));
 
 
 
-function getSumOfDigits(n) {
+class BinarySearchTree {
 
-   n = n.toString();
-   let res = 0;
-
-   reducer(n);
-   
-    function reducer (num) {
- res = 0;
-        num = num.toString();
-        console.log(`reducer`, num);
-
-        for ( let i = 0; i < n.length; i++ ) {
-
-            res += +num[i]
-        
-           }
-
+    constructor () {
+      this.data = new Map();
     }
+  
+    root() {
+  
+    }
+  
+    add(d) {
+      return this.data.set(d,d)
+    }
+  
+    has(d) {
+      return this.data.has(d)
+    }
+  
+    find(d) {
+    if (!this.data.has(d)) return null;
+    return d;
+    }
+  
+    remove(d) {
+      this.data.remove(d)
+    }
+  
+    min() {
+      return Math.min(...[...this.data.values()])
+    }
+  
+    max() {
+      return Math.max(...[...this.data.values()])
+    }
+  }
 
-   if (res.toString().length > 1) {
-    reducer(res)
-   }
-    return res;
+  let tree = new BinarySearchTree();
 
+  tree.add(1)
+  tree.add(2)
+  tree.add(3)
 
-}
-
-
-
-console.log(getSumOfDigits(35));
-
+  console.log(tree.max());
+  console.log(tree.min());
 
